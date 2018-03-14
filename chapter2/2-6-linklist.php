@@ -63,6 +63,42 @@ class LinkList
 		$node->next = $nodeNext;
 		return $el;
 	}
+	//面试题：18，删除重复节点
+	public function deleteRepeatNode()
+	{
+		$node = $this->head;
+		//头结点为空 直接返回
+		if($node == null){
+			return false;
+		}
+		$preNode = null;
+		while($node !== null){
+			$needDelete = false;
+			$curNodeVal = $node->data;
+			//当前节点与下一个节点值一致
+			if($node->next !== null && $node->next->data == $curNodeVal){
+				$needDelete = true;
+			}
+			if(!$needDelete){
+				$preNode = $node;
+				$node = $node->next;
+			}
+			//循环的删除所有重复节点
+			if($needDelete){
+				while($node !== null && $node->data == $curNodeVal){
+					$node = $node->next;
+				}
+				//修改preNode的值
+				if($preNode == null){
+					$this->head = $node;
+				}else{
+					$preNode->next = $node;
+				}
+				$node = $node->next;
+			}
+		}
+
+	}
 	public function show()
 	{
 		$node = $this->head;
@@ -86,6 +122,7 @@ class LinkList
 		echo '['.$node->data.']->';
 	}
 }
+//test
 
 $link = new LinkList();
 $arr = [1,2,3,4,5,6];
@@ -98,4 +135,13 @@ echo '<br />';
 // $link->show();
 //反向打印
 echo $link->reverseShow($link->head);
+echo '<br />';
+
+$link2 = new LinkList();
+$arr2 = [2,2,2,4,5];
+foreach ($arr2 as $k => $v) {
+	$link2->insert($v);
+}
+$link2->deleteRepeatNode();
+$link2->show();
 ?>
