@@ -1,9 +1,4 @@
 <?php
-class A
-{
-
-}
-$a = new A();
-$b = $a;
-xdebug_debug_zval('a');
+$a = [];
+var_dump(array_pop($a));
 ?>
