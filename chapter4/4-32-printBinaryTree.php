@@ -30,7 +30,10 @@ function printBinaryTree($root)
 }
 
 //test
-
+//    	  5
+//     4    6
+//	 3		  7
+// 2			 8
 $tree = new Tree();
 $data = [5,4,6,3,2,7,8];
 foreach ($data as $k => $v) {

@@ -38,5 +38,21 @@ class Tree
 		}
 		return $node;
 	}
+	//先序遍历
+	public function preOrder()
+	{
+		if($this->root == null){
+			return false;
+		}
+		$this->preOrderPrint($this->root);
+	}
+	private function preOrderPrint($node)
+	{
+		if($node !== null){
+			printf("%d\t", $node->value);
+			$this->preOrderPrint($node->left);
+			$this->preOrderPrint($node->right);
+		}
+	}
 }
 ?>
