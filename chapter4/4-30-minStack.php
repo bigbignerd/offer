@@ -3,23 +3,8 @@
  * 实现一个可以返回栈中最小元素的栈，并且使得push pop min的时间复杂度都是O(1)
  */
 
-class Stack
-{
-	private $data = [];
-	public function push($num)
-	{
-		return array_push($this->data, $num);
-	}
+require("../class/stack.php");
 
-	public function pop()
-	{
-		return array_pop($this->data);
-	}
-	public function top()
-	{
-		return end($this->data);
-	}
-}
 class MinStack
 {
 	private $minStack = null;
