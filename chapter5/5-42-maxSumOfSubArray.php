@@ -1,6 +1,6 @@
 <?php
 /**
- * 求数组子数组的最大和
+ * 求连续子数组的最大和
  */
 
 function maxSubArray($arr)
