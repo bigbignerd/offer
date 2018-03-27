@@ -42,6 +42,7 @@ class ConstructTree
 		$rootNode = new Node($rootVal,null,null);
 
 		if($preStart == $preEnd){
+			//到达叶子节点
 			if($inStart == $inEnd && $this->preorder[$preStart] == $this->inorder[$inStart]){
 				return $rootNode;
 			}else{

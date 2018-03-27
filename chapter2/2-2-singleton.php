@@ -10,7 +10,7 @@ class A
 	{
 		
 	}
-	protectd function __clone()
+	protected function __clone()
 	{
 
 	}
