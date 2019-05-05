@@ -25,14 +25,10 @@ class MaxHeap
      */
     private function shiftUp($index)
     {
-        //判断index 是否超出元素个数
-        if ($index > $this->count) {
-            throw new \Exception("Wrong index.");
-        }
         //如果当前元素 > 其父节点，则交换
-        while ($index > 1 && $this->data[$index] > $this->data[$index/2]) {
-            $this->swap($index, $index/2);
-            $index /= 2;
+        while ($index > 1 && $this->data[$index] > $this->data[intval($index/2)]) {
+            $this->swap($index, intval($index/2));
+            $index = intval($index/2);
         }
         return true;
     }
@@ -53,7 +49,9 @@ class MaxHeap
         $this->count--;
 
         //被交换到头部的节点下移直到直到合适的位置
-        $this->shiftDown(1);
+        if ($this->count > 0) {
+            $this->shiftDown(1);
+        }
 
         return $max;
     }
@@ -63,9 +61,6 @@ class MaxHeap
      */
     private function shiftDown($index)
     {
-        if ($index < 0 || $index > $this->count) {
-            throw new \Exception("Wrong index.");
-        }
         while (2*$index <= $this->count) {
             $k = 2 * $index;
             //找出index的两个子节点中较大的那一个的索引
@@ -104,5 +99,67 @@ class MaxHeap
 
 class MinHeap
 {
+    private $data = [];
+    private $count = 0;
 
+    public function pushBack($num)
+    {
+        $this->count++;
+        $this->data[$this->count] = $num;
+        $this->shiftUp($this->count);
+        return true;
+    }
+
+    public function popUp()
+    {
+        if ($this->count <= 0) {
+            return false;
+        }
+        $min = $this->data[1];
+        $this->data[1] = $this->data[$this->count];
+        $this->count--;
+        $this->shiftDown(1);
+        return $min;
+    }
+
+    public function getTop()
+    {
+        if ($this->count <= 0) {
+            return false;
+        }
+        return $this->data[1];
+    }
+
+    private function shiftUp($index)
+    {
+        //如果当前元素 <  其父节点，则交换
+        while ($index > 1 && $this->data[$index] < $this->data[intval($index/2)]) {
+            $this->swap($index, intval($index/2));
+            $index = intval($index/2);
+        }
+        return true;
+    }
+
+    private function shiftDown($index)
+    {
+        while (2*$index <= $this->count) {
+            $k = 2 * $index;
+            //找出index的两个子节点中较大的那一个的索引
+            if ($k + 1 <= $this->count && $this->data[$k] > $this->data[$k+1]) {
+                $k += 1;
+            }
+            //找到了正确的位置
+            if ($this->data[$index] <= $this->data[$k]) {
+                break;
+            }
+            //没找到正确位置，交换继续下沉
+            $this->swap($k, $index);
+            $index = $k;
+        }
+    }
+
+    private function swap($i, $j) 
+    {
+        list($this->data[$i], $this->data[$j]) = [$this->data[$j], $this->data[$i]];
+    }
 }
