@@ -88,6 +88,11 @@ class MaxHeap
         return $this->data[1];
     }
 
+    public function getSize()
+    {
+        return $this->count;
+    }
+
     /**
      * 交换数组两个元素
      */
@@ -128,6 +133,11 @@ class MinHeap
             return false;
         }
         return $this->data[1];
+    }
+
+    public function getSize()
+    {
+        return $this->count;
     }
 
     private function shiftUp($index)
