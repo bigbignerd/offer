@@ -1,6 +1,9 @@
 <?php
 require("../class/heap.php");
 
+/**
+ * 题目：如何得到一个数据流的中位数?
+ */
 class Median
 {
     private $minHeap = null;
@@ -14,8 +17,6 @@ class Median
 
     public function insert($data)
     {
-        //左边的数据用最大堆，右边的数据用最小堆   
-        
         //当前数据总数若为偶数，则插入最小堆，否则插入最大堆
         if ((($this->minHeap->getSize() + $this->maxHeap->getSize()) & 1) == 0) {
             //判断当前值是否小于最大堆中的最大值，如果是则应先插入最大堆再取出最大堆中的最大值
@@ -48,9 +49,11 @@ class Median
     }
 }
 
+//test
 $median = new Median();
 $testData = range(1,11);
 shuffle($testData);
+
 foreach($testData as $data) {
     $median->insert($data);
 }
