@@ -57,7 +57,6 @@ function moreThanHalfNumberV2($arr)
 	$number = $arr[0];
 	$count = 1;
 	for($i=1; $i<count($arr); $i++){
-	
 		if($count == 0){
 			$number = $arr[$i];
 			$count = 1;
@@ -79,4 +78,5 @@ echo '<hr>';
 echo 'test method2<br/>';
 $arr = [1,2,3,2,2,2,5,4,2];
 echo moreThanHalfNumberV2($arr);
+
 ?>
