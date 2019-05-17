@@ -1,10 +1,11 @@
 <?php
 require("../class/util.php");
+require("../class/heap.php");
 /**
  * 求最小的k个数
  */
 
-//解法一：partition的方式找到索引为k的位置
+//解法一：partition的方式找到索引为k的位置，时间复杂度O(n)?
 function smallestKnumberV1($arr, $k)
 {
     $total = count($arr);
@@ -16,7 +17,7 @@ function smallestKnumberV1($arr, $k)
     $index = partition($arr, $start, $end);
     while ($index != $k-1) {
         if ($index < $k-1) {
-            $start = $index+1;
+            $start = $index + 1;
         } else {
             $end = $index - 1;
         }
@@ -28,9 +29,35 @@ function smallestKnumberV1($arr, $k)
     }
 }
 
+//解法二：使用k个元素的最大堆
+function smallestKnumberV2($arr, $k)
+{
+    $count = 0;
+    $maxHeap = new MaxHeap();
+    foreach($arr as $v) {
+        if ($count < $k) {
+            $maxHeap->pushBack($v);
+            $count++;
+            continue;
+        } 
+        if($maxHeap->getTop() > $v) {
+            $maxHeap->popUp();    
+            $maxHeap->pushBack($v);
+        }
+    }
+    //打印堆中元素
+    while ($count > 0) {
+        echo $maxHeap->popUp();
+        $count--;
+    }
+}
+
 //测试v1 partition
 $data = unsortUniqueArr(10);
 echo implode(",", $data) . PHP_EOL;
 smallestKnumberV1($data, 4);
+
+//v2
+smallestKnumberV2($data, 5);
 
 ?>
