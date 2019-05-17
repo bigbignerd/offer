@@ -29,7 +29,7 @@ function smallestKnumberV1($arr, $k)
     }
 }
 
-//解法二：使用k个元素的最大堆
+//解法二：使用k个元素的最大堆 时间复杂度O(nlogk)
 function smallestKnumberV2($arr, $k)
 {
     $count = 0;
