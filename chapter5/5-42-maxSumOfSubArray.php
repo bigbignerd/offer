@@ -10,13 +10,14 @@ function maxSubArray($arr)
 	}
 	$maxSum = 0;
 	$curSum = 0;
-	for($i=0; $i< count($arr); $i++){
-		if($curSum <= 0){
+    $count = count($arr);
+	for ($i=0; $i<$count; $i++) {
+		if ($curSum <= 0) {
 			$curSum = $arr[$i];
-		}else{
+		} else {
 			$curSum += $arr[$i];
 		}
-		if($curSum > $maxSum){
+		if ($curSum > $maxSum) {
 			$maxSum = $curSum;
 		}
 	}
